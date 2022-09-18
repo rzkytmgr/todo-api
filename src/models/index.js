@@ -6,6 +6,7 @@ const sequelize = new Sequelize(config.database.name, config.database.username, 
   dialect: config.database.dialect,
   dialectOptions: { host: config.database.host, port: config.database.port },
   host: { beforeDefine: (column, model) => (model.tableName = `tbl_${model.name.plural}`) },
+  logging: false,
 });
 
 module.exports = {

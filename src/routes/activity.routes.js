@@ -48,13 +48,13 @@ router.post('/', async (req, res) => {
     if (!title)
       return res.status(400).json({
         status: 'Bad Request',
-        message: 'title can not be null',
+        message: 'title cannot be null',
         data: {},
       });
 
-    const result = await Activity.create({ email, title });
+    const result = await Activity.create({ email: email ?? '', title });
 
-    return res.status(200).json({
+    return res.status(201).json({
       status: 'Success',
       message: 'Success',
       data: result,
@@ -97,7 +97,7 @@ router.patch('/:activityId', async (req, res) => {
     if (!req.body.title)
       return res.status(400).json({
         status: 'Bad Request',
-        message: 'title can not be null',
+        message: 'title cannot be null',
         data: {},
       });
 
