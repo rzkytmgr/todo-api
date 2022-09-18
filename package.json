@@ -1,15 +1,20 @@
 {
   "name": "devcode",
   "version": "1.0.0",
-  "description": "",
+  "description": "todo api devcode challange",
   "main": "app.js",
   "scripts": {
     "start": "node app",
     "dev": "nodemon app",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "devcode",
+    "api",
+    "todo",
+    "nodejs"
+  ],
+  "author": "rzkytmgr",
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {

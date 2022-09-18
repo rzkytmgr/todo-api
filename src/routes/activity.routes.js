@@ -44,7 +44,7 @@ router.get('/:activityId', async (req, res) => {
 router.post('/', async (req, res) => {
   try {
     const { title, email } = req.body;
-
+    console.log(req.body);
     if (!title)
       return res.status(400).json({
         status: 'Bad Request',
