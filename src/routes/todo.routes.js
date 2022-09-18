@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const { keyConverter } = require('../util');
 const { Todo, Activity } = require('../models');
 
 router.get('/', async (req, res) => {
@@ -24,7 +25,7 @@ router.get('/:todoId', async (req, res) => {
     if (!result)
       return res.status(404).json({
         status: 'Not Found',
-        message: `Todo with ID ${req.params.activityId} Not Found`,
+        message: `Todo with ID ${req.params.todoId} Not Found`,
         data: {},
       });
 
@@ -52,7 +53,7 @@ router.post('/', async (req, res) => {
     if (!data.activityGroupId)
       return res.status(400).json({
         status: 'Bad Request',
-        message: 'activity_group_id can not be null',
+        message: 'activity_group_id cannot be null',
         data: {},
       });
     const activity = await Activity.findOne({ where: { id: data.activityGroupId } });
@@ -65,11 +66,11 @@ router.post('/', async (req, res) => {
     if (!data.title)
       return res.status(400).json({
         status: 'Bad Request',
-        message: 'title can not be null',
+        message: 'title cannot be null',
         data: {},
       });
     const result = await Todo.create(data);
-    return res.status(200).json({
+    return res.status(201).json({
       status: 'Success',
       message: 'Success',
       data: result,
@@ -88,7 +89,7 @@ router.delete('/:todoId', async (req, res) => {
     if (!result)
       return res.status(404).json({
         status: 'Not Found',
-        message: `Todo with ID ${req.params.activityId} Not Found`,
+        message: `Todo with ID ${req.params.todoId} Not Found`,
         data: {},
       });
     await result.destroy();
@@ -111,12 +112,12 @@ router.patch('/:todoId', async (req, res) => {
     if (!result)
       return res.status(404).json({
         status: 'Not Found',
-        message: `Todo with ID ${req.params.activityId} Not Found`,
+        message: `Todo with ID ${req.params.todoId} Not Found`,
         data: {},
       });
     const data = {
       title: req.body.title,
-      isActive: req.body.is_active,
+      isActive: req.body.is_active ? '1' : '0',
       priority: req.body?.priority ?? 'very-high',
     };
     result = await result.update(data);
